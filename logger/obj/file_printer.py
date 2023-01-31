@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# ----------------------------------------------------------------------------------------------------------------------
+import datetime
+import os
+from typing import ClassVar
+
+from logger.obj.abstract_classes import Notifier
+from logger.obj.constants import DECODING
+
+
+class StandardResultFilePrinter(Notifier):
+    """ Класс вывода полей объекта в файл logs\{data_key}_log.txt, где data_key - метка времени создания файла
+    """
+    DECODING: ClassVar[dict] = DECODING['turning']
+
+    def __init__(self) -> None:
+        # Настройки по умолчанию. Расположение лога определять вне класса.
+        self.prefix = datetime.datetime.now().strftime('%H-%M %d-%m-%Y')
+        self.folder = f"{__file__}".replace("obj\\file_printer.py", f"logs")
+        self.path = self.folder + f"\\{self.prefix}_log.txt"
+
+    def _check_folder(self, folder_path=None) -> None:
+        """ Если папки 'logs' в директории проекта нет - создаст ее.
+        """
+        if isinstance(folder_path, type(None)):
+            folder_path = self.folder
+        if not os.path.exists(folder_path):
+            os.mkdir(folder_path)
+
+    def log(self, obj, message=None, path=None, full=False) -> str:
+        """ У логгируемого объекта 'obj' ловит словарь параметров и свойств ('obj' должен иметь метод
+        'dict_parameters'), печатает описание и значение ключа (описание берет из словаря 'DECODING'). Для печати
+        ключей, для которых описание не определено в 'DECODING', задать full=True.
+        """
+        if isinstance(path, type(None)):
+            self._check_folder()
+            path = self.path
+
+        with open(path, 'a+', encoding='UTF8') as f:
+            f.write(f"{message}\n")
+            for key, val in obj.dict_parameters.items():
+                if full:
+                    f.write(f"{self.DECODING[key].format(obj=val)}\n") if key in self.DECODING else f.write(f"{key} = {val}\n")
+                else:
+                    f.write(f"{self.DECODING[key].format(obj=val)}\n") if key in self.DECODING else f.write(f"")
+            f.write("\n")
+        return path
+
+
+class StandardObjectFilePrinter(StandardResultFilePrinter):
+    """ Класс вывода обекта в файл logs\{data_key}_log.txt, где data_key - метка времени создания файла"""
+    def __init__(self):
+        StandardResultFilePrinter.__init__(self)
+
+    def log(self, obj, message=None, path=None, _full=False):
+        """ У логгируемого объекта 'obj' ловит словарь параметров и свойств ('obj' должен иметь метод
+        'dict_parameters'), печатает название класса и словарь параметров.
+        """
+        if isinstance(path, type(None)):
+            self._check_folder()
+            path = self.path
+
+        with open(path, 'a+', encoding='UTF8') as f:
+            f.write(f"{obj.__class__.__name__}({obj.dict_parameters})\n")
+        return path
