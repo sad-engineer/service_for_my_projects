@@ -10,9 +10,10 @@ from logger.obj.constants import DECODING
 
 
 class StandardResultFilePrinter(Notifier):
-    """ Класс вывода полей объекта в файл logs\{data_key}_log.txt, где data_key - метка времени создания файла
+    """ Класс вывода полей объекта в файл logs\\{data_key}_log.txt,
+     где data_key - метка времени создания файла
     """
-    DECODING: ClassVar[dict] = DECODING['turning']
+    DECODING: ClassVar[dict] = DECODING
 
     def __init__(self) -> None:
         # Настройки по умолчанию. Расположение лога определять вне класса.
@@ -29,7 +30,7 @@ class StandardResultFilePrinter(Notifier):
             os.mkdir(folder_path)
 
     def log(self, obj, message=None, path=None, full=False) -> str:
-        """ У логгируемого объекта 'obj' ловит словарь параметров и свойств ('obj' должен иметь метод
+        """ У логируемого объекта 'obj' ловит словарь параметров и свойств ('obj' должен иметь метод
         'dict_parameters'), печатает описание и значение ключа (описание берет из словаря 'DECODING'). Для печати
         ключей, для которых описание не определено в 'DECODING', задать full=True.
         """
@@ -41,7 +42,8 @@ class StandardResultFilePrinter(Notifier):
             f.write(f"{message}\n")
             for key, val in obj.dict_parameters.items():
                 if full:
-                    f.write(f"{self.DECODING[key].format(obj=val)}\n") if key in self.DECODING else f.write(f"{key} = {val}\n")
+                    f.write(f"{self.DECODING[key].format(obj=val)}\n") if key in self.DECODING else \
+                        f.write(f"{key} = {val}\n")
                 else:
                     f.write(f"{self.DECODING[key].format(obj=val)}\n") if key in self.DECODING else f.write(f"")
             f.write("\n")
@@ -49,12 +51,12 @@ class StandardResultFilePrinter(Notifier):
 
 
 class StandardObjectFilePrinter(StandardResultFilePrinter):
-    """ Класс вывода обекта в файл logs\{data_key}_log.txt, где data_key - метка времени создания файла"""
+    """ Класс вывода объекта в файл logs\\{data_key}_log.txt, где data_key - метка времени создания файла"""
     def __init__(self):
         StandardResultFilePrinter.__init__(self)
 
     def log(self, obj, message=None, path=None, _full=False):
-        """ У логгируемого объекта 'obj' ловит словарь параметров и свойств ('obj' должен иметь метод
+        """ У логируемого объекта 'obj' ловит словарь параметров и свойств ('obj' должен иметь метод
         'dict_parameters'), печатает название класса и словарь параметров.
         """
         if isinstance(path, type(None)):

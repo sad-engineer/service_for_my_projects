@@ -18,7 +18,7 @@
 
     Абстрактный базовый класс для наследования всеми логгерами:
         logger.Notifier
-    
+
 
 
     Класс вывода полей объекта в консоль (наследник logger.Notifier):
@@ -73,4 +73,45 @@
         Вывод строки вида "ClassName({dict_param})" в файл:
             file_printer.log(obj)
 
+
+    
+    `Общий класс логирования объекта:`
+        создаем логер:
+            printer = logger.logger(obj:Dictionarer,  notifier=any_notifier,  message=any_message,  
+                                    path=any_path, full=False)
+        
+        вывод полей объекта в консоль (описание полей обьекта в any_dict):
+            any_message = "any_message"
+            terminal_printer = logger.StandardResultTerminalPrinter()
+            terminal_printer.DECODING = any_dict 
+            printer.log(obj:Dictionarer,  notifier=terminal_printer,  message=any_message)
+        
+        вывод всех полей объекта в консоль:
+            any_message = "any_message"
+            terminal_printer = logger.StandardResultTerminalPrinter()
+            terminal_printer.DECODING = any_dict 
+            printer.log(obj:Dictionarer,  notifier=terminal_printer,  message=any_message, full=True)
+        
+        вывод объекта в консоль:
+            terminal_printer = logger.StandardObjectTerminalPrinter()
+            printer.log(obj:Dictionarer,  notifier=terminal_printer)
+
+        вывод полей объекта в файл (описание полей обьекта в any_dict):
+            any_message = "any_message"
+            any_path = "log.txt"
+            terminal_printer = logger.StandardResultFilePrinter()
+            terminal_printer.DECODING = any_dict 
+            printer.log(obj:Dictionarer,  notifier=terminal_printer,  message=any_message, path=any_path)
+        
+        вывод всех полей объекта в файл:
+            any_message = "any_message"
+            any_path = "log.txt"
+            terminal_printer = logger.StandardResultFilePrinter()
+            terminal_printer.DECODING = any_dict 
+            printer.log(obj:Dictionarer,  notifier=terminal_printer,  message=any_message, path=any_path, full=True)
+        
+        вывод объекта в файл:
+            terminal_printer = logger.StandardObjectFilePrinter()
+            terminal_printer.DECODING = any_dict
+            printer.log(obj:Dictionarer,  notifier=terminal_printer)
 ---

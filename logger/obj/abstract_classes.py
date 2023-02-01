@@ -6,10 +6,12 @@ from abc import ABC, abstractmethod
 
 class Dictionarer(ABC):
     """ Абстрактный класс, наследовать для вывода словаря параметров класса"""
+
     @abstractmethod
     def _dict_parameters(self) -> dict: pass
-        # """ Возвращать словарь публичных параметров класса. Использовать для конструктора внитри дочерних классов
-        # (при множественном наследовании) """
+
+    # """ Возвращать словарь публичных параметров класса. Использовать для конструктора внутри дочерних классов
+    # (при множественном наследовании) """
 
     @property
     def dict_parameters(self):
@@ -17,8 +19,7 @@ class Dictionarer(ABC):
 
 
 class Notifier(ABC):
-    """ Абстрактный класс, базовый для всех логгеров или классов вывода результата"""
+    """ Абстрактный класс, базовый для всех логеров или классов вывода результата"""
+
     @abstractmethod
-    def log(self, obj, message, path): return path
-
-
+    def log(self, obj, message, path, full): return path
