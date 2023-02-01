@@ -8,14 +8,14 @@ class Dictionarer(ABC):
     """ Абстрактный класс, наследовать для вывода словаря параметров класса"""
 
     @abstractmethod
-    def _dict_parameters(self) -> dict: pass
+    def _parameters(self) -> dict: pass
 
     # """ Возвращать словарь публичных параметров класса. Использовать для конструктора внутри дочерних классов
     # (при множественном наследовании) """
 
     @property
-    def dict_parameters(self):
-        return self._dict_parameters()
+    def parameters(self):
+        return self._parameters()
 
 
 class Notifier(ABC):

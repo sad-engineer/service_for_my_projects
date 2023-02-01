@@ -74,6 +74,14 @@
             file_printer.log(obj)
 
 
+    Класс сохранения обьекта в файл:
+        Создаем логер:
+            file_printer = logger.StandardObjectFileSaver()
+        Сохраняет только те поля, которые указаны в свойстве "SAVED_FIELDS" класса
+            file_printer. SAVED_FIELDS = ["name_1", "name_2", ...]
+        Вывод строки вида "ClassName({dict_param})" в файл:
+            file_printer.log(obj)
+
     
     `Общий класс логирования объекта:`
         создаем логер:
@@ -99,19 +107,24 @@
         вывод полей объекта в файл (описание полей обьекта в any_dict):
             any_message = "any_message"
             any_path = "log.txt"
-            terminal_printer = logger.StandardResultFilePrinter()
-            terminal_printer.DECODING = any_dict 
-            printer.log(obj:Dictionarer,  notifier=terminal_printer,  message=any_message, path=any_path)
+            file_printer = logger.StandardResultFilePrinter()
+            file_printer.DECODING = any_dict 
+            printer.log(obj:Dictionarer,  notifier=file_printer,  message=any_message, path=any_path)
         
         вывод всех полей объекта в файл:
             any_message = "any_message"
             any_path = "log.txt"
-            terminal_printer = logger.StandardResultFilePrinter()
-            terminal_printer.DECODING = any_dict 
-            printer.log(obj:Dictionarer,  notifier=terminal_printer,  message=any_message, path=any_path, full=True)
+            file_printer = logger.StandardResultFilePrinter()
+            file_printer.DECODING = any_dict 
+            printer.log(obj:Dictionarer,  notifier=file_printer,  message=any_message, path=any_path, full=True)
         
         вывод объекта в файл:
-            terminal_printer = logger.StandardObjectFilePrinter()
-            terminal_printer.DECODING = any_dict
-            printer.log(obj:Dictionarer,  notifier=terminal_printer)
+            file_printer = logger.StandardObjectFilePrinter()
+            file_printer.DECODING = any_dict
+            printer.log(obj:Dictionarer,  notifier=file_printer)
+        
+        сохранение объекта в файл:
+            file_printer = logger.StandardObjectFileSaver()
+            file_printer.SAVED_FIELDS = ["name_1", "name_2", ...]    # Задаем названия полей для сохранения
+            printer.log(obj:Dictionarer,  notifier=file_printer)
 ---
