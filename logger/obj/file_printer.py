@@ -18,7 +18,7 @@ class StandardResultFilePrinter(Notifier):
     def __init__(self) -> None:
         # Настройки по умолчанию. Расположение лога определять вне класса.
         self.prefix = datetime.datetime.now().strftime('%H-%M %d-%m-%Y')
-        self.folder = f"{__file__}".replace("obj\\file_printer.py", f"logs")
+        self.folder = os.path.join(os.getcwd(), "logs")
         self.path = self.folder + f"\\{self.prefix}_log.txt"
 
     def _check_folder(self, folder_path=None) -> None:
