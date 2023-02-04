@@ -6,14 +6,15 @@ import sqlite3
 
 from logger.obj.abstract_classes import RecordRequester
 
+# TODO: Запросы - исключить pandas
+
 
 class RequestRecordFromSQLyte(RecordRequester):
     """Класс запросов для работы с таблицами в базе данных SQLyte."""
 
-    def __init__(self, filename: str, tablename: str, database_client):
+    def __init__(self, tablename: str, database_client: sqlite3.Connection):
         """Инициализация объекта"""
-        self.db = database_client
-        self.filename = filename
+        self.database_client = database_client
         self.tablename = tablename
 
     def get_records(self, values_dict: dict) -> pd.DataFrame:
@@ -30,7 +31,7 @@ class RequestRecordFromSQLyte(RecordRequester):
         DataFrame
             DataFrame с записями, соответствующими данным столбцам и значениям.
         """
-        with sqlite3.connect(self.filename) as conn:
+        with self.database_client as conn:
             query = f"SELECT * FROM {self.tablename} WHERE "
             for column, value in values_dict.items():
                 query += f"{column} = '{value}' AND "
@@ -41,7 +42,7 @@ class RequestRecordFromSQLyte(RecordRequester):
     @property
     def get_all_records(self) -> pd.DataFrame:
         """ Возвращает DataFrame со всеми записями таблицы tablename."""
-        with sqlite3.connect(self.filename) as conn:
+        with self.database_client as conn:
             query = f"SELECT * FROM {self.tablename}"
             df = pd.read_sql(query, conn)
         return df

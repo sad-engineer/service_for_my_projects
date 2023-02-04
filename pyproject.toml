@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "logger"
-version = "0.1.05"
+version = "0.1.06"
 description = ""
 authors = ["Andrey Nikolaevich Korenyuk <korenyuk.a.n@mail.ru>"]
 readme = "README.md"
@@ -9,6 +9,7 @@ packages = [{include = "logger"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 dependency-injector = "^4.41.0"
+pandas = "^1.5.3"
 
 
 [build-system]
