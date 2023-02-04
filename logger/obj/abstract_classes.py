@@ -23,3 +23,18 @@ class Notifier(ABC):
 
     @abstractmethod
     def log(self, obj, message, path, full): return path
+
+
+class RecordRequester(ABC):
+    """ Абстрактный класс, реализующий работу с какой-либо БД"""
+    @abstractmethod
+    def get_records(self, values_dict: dict):
+        # """ Реализация метода должна обеспечивать получение записей по словарю столбцов:значений, передаваемых в
+        # values_dict """
+        pass
+
+    @property
+    @abstractmethod
+    def get_all_records(self):
+        # """ Возвращает DataFrame со всеми записями таблицы tablename."""
+        pass

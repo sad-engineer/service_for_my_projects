@@ -12,6 +12,9 @@ class StandardResultTerminalPrinter(Notifier):
     """ Класс вывода полей объекта в консоль"""
     DECODING: ClassVar[dict] = DECODING
 
+    def __int__(self, decoding: dict):
+        self.DECODING = decoding
+
     def log(self, obj, message=None, _path=None, _full=False):
         if message:
             sys.stdout.write("\n" + message + "\n")
@@ -21,6 +24,5 @@ class StandardResultTerminalPrinter(Notifier):
 
 class StandardObjectTerminalPrinter(Notifier):
     """ Класс вывода объекта в консоль"""
-
     def log(self, obj, _message=None, _path=None, _full=False):
         sys.stdout.write(f"{obj.__class__.__name__}({obj.parameters})\n")

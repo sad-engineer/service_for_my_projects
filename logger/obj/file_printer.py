@@ -3,9 +3,9 @@
 # ----------------------------------------------------------------------------------------------------------------------
 import datetime
 import os
+from typing import ClassVar
 
 from logger.obj.abstract_classes import Notifier
-from typing import ClassVar
 
 
 class StandardResultFilePrinter(Notifier):
@@ -14,8 +14,9 @@ class StandardResultFilePrinter(Notifier):
     """
     DECODING: ClassVar[dict] = {}
 
-    def __init__(self) -> None:
+    def __init__(self, decoding: dict) -> None:
         # Настройки по умолчанию. Расположение лога определять вне класса.
+        self.DECODING = decoding
         self.prefix = datetime.datetime.now().strftime('%H-%M %d-%m-%Y')
         self.folder = os.path.join(os.getcwd(), "logs")
         self.path = self.folder + f"\\{self.prefix}_log.txt"
@@ -71,7 +72,8 @@ class StandardObjectFileSaver(StandardResultFilePrinter):
     """ Класс вывода объекта в файл logs\\{data_key}_log.txt. Выводит только поля, заданные в SAVED_FIELDS"""
     SAVED_FIELDS: ClassVar[list] = []
 
-    def __init__(self):
+    def __init__(self, saved_fields:list = []):
+        self.SAVED_FIELDS = saved_fields
         StandardResultFilePrinter.__init__(self)
 
     def log(self, obj, message=None, path=None, _full=False):
