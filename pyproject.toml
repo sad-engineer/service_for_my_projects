@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "logger"
-version = "0.1.08"
+version = "0.1.09"
 description = ""
 authors = ["Andrey Nikolaevich Korenyuk <korenyuk.a.n@mail.ru>"]
 readme = "README.md"

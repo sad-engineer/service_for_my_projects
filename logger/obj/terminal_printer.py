@@ -12,7 +12,7 @@ class StandardResultTerminalPrinter(Notifier):
     """ Класс вывода полей объекта в консоль"""
     DECODING: ClassVar[dict] = DECODING
 
-    def __int__(self, decoding: dict):
+    def __init__(self, decoding: dict):
         self.DECODING = decoding
 
     def log(self, obj, message=None, _path=None, _full=False):
