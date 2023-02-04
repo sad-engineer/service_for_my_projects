@@ -72,9 +72,9 @@ class StandardObjectFileSaver(StandardResultFilePrinter):
     """ Класс вывода объекта в файл logs\\{data_key}_log.txt. Выводит только поля, заданные в SAVED_FIELDS"""
     SAVED_FIELDS: ClassVar[list] = []
 
-    def __init__(self, saved_fields:list = []):
+    def __init__(self, decoding: dict, saved_fields: list = []):
+        StandardResultFilePrinter.__init__(self, decoding)
         self.SAVED_FIELDS = saved_fields
-        StandardResultFilePrinter.__init__(self)
 
     def log(self, obj, message=None, path=None, _full=False):
         """ У логируемого объекта 'obj' ловит словарь параметров и свойств ('obj' должен иметь метод

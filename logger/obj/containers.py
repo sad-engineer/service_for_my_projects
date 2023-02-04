@@ -46,6 +46,7 @@ class Container(containers.DeclarativeContainer):
     standard_object_file_saver = providers.Singleton(
         file_printer.StandardObjectFileSaver,
         decoding=constants.DECODING,
+        saved_fields=[],
     )
 
     logger = providers.Singleton(
