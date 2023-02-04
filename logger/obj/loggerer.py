@@ -8,4 +8,4 @@ class Logger:
     """ Передает в конкретный логер объект вывода """
     @staticmethod
     def log(obj, notifier=_Terminal, message=None, path=None, full=False):
-        return notifier().log(obj, message, path, full)
+        return notifier.log(obj, message, path, full)
