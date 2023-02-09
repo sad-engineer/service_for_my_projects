@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------------------------------------------------------
+from importlib import import_module
+
+
 class Cataloger:
     """ Хранит ссылки на классы проекта"""
     def __init__(self, module_name: str, dict_types: dict) -> None:
-        self._classes = [obj for name, obj in __import__(module_name).__dict__.items() if isinstance(obj, type)]
+        self._classes = [obj for name, obj in import_module(module_name).__dict__.items() if isinstance(obj, type)]
         self._dict_types = dict_types
 
     @property
