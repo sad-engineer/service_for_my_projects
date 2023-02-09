@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------------------------------------------------------
-from logger.obj.terminal_printer import StandardResultTerminalPrinter as _Terminal
+from service.obj.terminal_printer import StandardResultTerminalPrinter as _Terminal
 
 
 class Logger:

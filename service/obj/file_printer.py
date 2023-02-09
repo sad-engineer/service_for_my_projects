@@ -5,7 +5,7 @@ import datetime
 import os
 from typing import ClassVar
 
-from logger.obj.abstract_classes import Notifier
+from service.obj.abstract_classes import Notifier
 
 
 class StandardResultFilePrinter(Notifier):

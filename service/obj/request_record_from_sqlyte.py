@@ -3,10 +3,20 @@
 # -------------------------------------------------------------------------------
 import pandas as pd
 import sqlite3
+from abc import ABC, abstractmethod
 
-from logger.obj.abstract_classes import RecordRequester
 
-# TODO: Запросы - исключить pandas
+class RecordRequester(ABC):
+    """ Абстрактный класс, реализующий работу с какой-либо БД"""
+    @abstractmethod
+    # """ Реализация метода должна обеспечивать получение записей по словарю столбцов:значений, передаваемых в
+    # values_dict """
+    def get_records(self, values_dict: dict): pass
+
+    @property
+    @abstractmethod
+    # """ Возвращает DataFrame со всеми записями таблицы tablename."""
+    def get_all_records(self): pass
 
 
 class RequestRecordFromSQLyte(RecordRequester):

@@ -4,8 +4,8 @@
 import sys
 from typing import ClassVar
 
-from logger.obj.abstract_classes import Notifier
-from logger.obj.constants import DECODING
+from service.obj.abstract_classes import Notifier
+from service.obj.constants import DECODING
 
 
 class StandardResultTerminalPrinter(Notifier):
