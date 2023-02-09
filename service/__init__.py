@@ -7,7 +7,8 @@ from service.obj.abstract_classes import Notifier
 from service.obj.abstract_classes import RecordRequester
     # Каталогеры
 from service.obj.cataloger import Cataloger
-
+    # Интерфейсы
+from service.obj.checker_in_dict import CheckerInDictionary
     # Пользовательские ошибки
 from service.obj.exceptions import InvalidValue, ReceivedEmptyDataFrame
     # Вывод в файл
