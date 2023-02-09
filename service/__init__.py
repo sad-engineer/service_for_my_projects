@@ -6,7 +6,7 @@ from service.obj.abstract_classes import Dictionarer
 from service.obj.abstract_classes import Notifier
 from service.obj.abstract_classes import RecordRequester
     # Каталогеры
-from service.obj.cataloger import ModuleCataloger, DictCataloger
+from service.obj.cataloger import Cataloger
 
     # Пользовательские ошибки
 from service.obj.exceptions import InvalidValue, ReceivedEmptyDataFrame
