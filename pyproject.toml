@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "service"
-version = "0.1.12"
+version = "0.1.13"
 description = ""
 authors = ["Andrey Nikolaevich Korenyuk <korenyuk.a.n@mail.ru>"]
 readme = "README.md"
-packages = [{include = "logger"}]
+packages = [{include = "service"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
