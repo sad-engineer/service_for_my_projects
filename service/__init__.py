@@ -22,3 +22,28 @@ from service.obj.request_record_from_sqlyte import RequestRecordFromSQLyte
     # Вывод в консоль
 from service.obj.terminal_printer import StandardResultTerminalPrinter
 from service.obj.terminal_printer import StandardObjectTerminalPrinter
+
+
+from service.obj.containers import Requester
+
+
+# if __name__ == "__main__":
+#
+#     container = Requester()
+#     requester = container.requester()
+#     print(requester)
+#     reader = container.reader()
+#     print(reader)
+#
+#
+#     settings = {'path': ':memory:', 'tablename': ':memory:', 'requester_type': 'sqlite', 'reader_type': 'list'}
+#     container.config.from_dict(settings)
+#     reader = container.reader()
+#     print(reader)
+#
+#     settings = {'path': ':memory:', 'tablename': ':memory:', 'requester_type': 'sqlite', 'reader_type': 'list_dict'}
+#     container.config.from_dict(settings)
+#     reader = container.reader()
+#     print(reader)
+#
+#     print(container.config())

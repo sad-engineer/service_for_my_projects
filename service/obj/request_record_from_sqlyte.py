@@ -3,29 +3,47 @@
 # -------------------------------------------------------------------------------
 import pandas as pd
 import sqlite3
-from abc import ABC, abstractmethod
+
+from service.obj.abstract_classes import RecordRequester, DatabaseReader
 
 
-class RecordRequester(ABC):
-    """ Абстрактный класс, реализующий работу с какой-либо БД"""
-    @abstractmethod
-    # """ Реализация метода должна обеспечивать получение записей по словарю столбцов:значений, передаваемых в
-    # values_dict """
-    def get_records(self, values_dict: dict): pass
+class ReaderInPandasTable(DatabaseReader):
+    """Класс читает данные из БД в таблицу pandas.DataFrame """
+    def read(self, query, conn):
+        return pd.read_sql(query, conn)
 
-    @property
-    @abstractmethod
-    # """ Возвращает DataFrame со всеми записями таблицы tablename."""
-    def get_all_records(self): pass
+
+class ReaderInList(DatabaseReader):
+    """Класс читает данные из БД !!! """
+    def read(self, query, conn):
+        cur = conn.cursor()
+        cur.execute(query)
+        return cur.execute(query).fetchall()
+
+
+class ReaderInListDict(DatabaseReader):
+    """Класс читает данные из БД !!! """
+    def read(self, query, conn):
+        cur = conn.cursor()
+        cur.execute(query)
+        columns = [column[0] for column in cur.description]
+        rows = cur.fetchall()
+        data = {}
+        for i in range(len(rows)):
+            key = i
+            item = {column_name: value for column_name, value in zip(columns, rows[i])}
+            data[key] = item
+        return data
 
 
 class RequestRecordFromSQLyte(RecordRequester):
     """Класс запросов для работы с таблицами в базе данных SQLyte."""
 
-    def __init__(self, tablename: str, database_client: sqlite3.Connection):
+    def __init__(self, tablename: str, database_client: sqlite3.Connection, database_reader):
         """Инициализация объекта"""
-        self.database_client = database_client
         self.tablename = tablename
+        self._database_client = database_client
+        self._database_reader = database_reader
 
     def get_records(self, values_dict: dict) -> pd.DataFrame:
         """
@@ -41,18 +59,16 @@ class RequestRecordFromSQLyte(RecordRequester):
         DataFrame
             DataFrame с записями, соответствующими данным столбцам и значениям.
         """
-        with self.database_client as conn:
+        with self._database_client as conn:
             query = f"SELECT * FROM {self.tablename} WHERE "
             for column, value in values_dict.items():
                 query += f"{column} = '{value}' AND "
             query = query[:-4]
-            df = pd.read_sql(query, conn)
-        return df
+        return self._database_reader.read(query, conn)
 
     @property
     def get_all_records(self) -> pd.DataFrame:
         """ Возвращает DataFrame со всеми записями таблицы tablename."""
-        with self.database_client as conn:
+        with self._database_client as conn:
             query = f"SELECT * FROM {self.tablename}"
-            df = pd.read_sql(query, conn)
-        return df
+        return self._database_reader.read(query, conn)
