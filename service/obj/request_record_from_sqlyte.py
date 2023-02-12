@@ -32,7 +32,7 @@ class ReaderInListDict(DatabaseReader):
         for i in range(len(rows)):
             key = i
             item = {column_name: value for column_name, value in zip(columns, rows[i])}
-            data[key] = item
+            data.append(item)
         return data
 
 
