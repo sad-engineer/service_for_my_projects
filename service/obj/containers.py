@@ -8,14 +8,12 @@ from service.obj.request_record_from_sqlyte import RequestRecordFromSQLyte
 from service.obj.request_record_from_sqlyte import ReaderInPandasTable
 from service.obj.request_record_from_sqlyte import ReaderInList
 from service.obj.request_record_from_sqlyte import ReaderInListDict
-
-SETTINGS = {'path': ':memory:', 'tablename': ':memory:', 'requester_type': 'sqlite', 'reader_type': 'pandas_table'}
+from service.obj.request_record_from_sqlyte import ReaderInDict
 
 
 class Requester(containers.DeclarativeContainer):
 
     config = providers.Configuration()
-    config.from_dict(SETTINGS)
 
     # База данных для запросов
     database_client = providers.Singleton(
@@ -36,18 +34,23 @@ class Requester(containers.DeclarativeContainer):
         ReaderInListDict,
     )
 
+    to_dict = providers.Singleton(
+        ReaderInDict,
+    )
+
     # Выбор класса чтения данных
     reader = providers.Selector(
         config.reader_type,
         pandas_table=to_pandas_table,
         list=to_list,
         list_dict=to_list_dict,
+        dict=to_dict,
     )
 
     # Классы запросов:
     csv_requester = providers.Singleton()
 
-    sqlyte_requester = providers.Singleton(
+    sqlyte_requester = providers.Factory(
         RequestRecordFromSQLyte,
         tablename=config.tablename,
         database_client=database_client,
@@ -62,15 +65,13 @@ class Requester(containers.DeclarativeContainer):
     )
 
 
-
 # if __name__ == "__main__":
+#     SETTINGS = {'path': ':memory:', 'tablename': 'characteristics_of_material', 'requester_type': 'sqlite', 'reader_type': 'pandas_table'}
+#
 #     container = Requester()
-#     container.config.from_dict(
-#         {'path': ':memory:',
-#          'tablename': "characteristics_of_material",
-#          'requester_type': 'sqlite',
-#          'reader_type': 'pandas_table'})
+#     container.config.from_dict(SETTINGS)
 #     requester = container.requester()
 #     print(requester)
 #     print(container.config())
 #     print(requester.tablename)
+#     print(requester._database_reader)

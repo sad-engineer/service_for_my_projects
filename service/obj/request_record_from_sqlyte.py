@@ -28,6 +28,21 @@ class ReaderInListDict(DatabaseReader):
         cur.execute(query)
         columns = [column[0] for column in cur.description]
         rows = cur.fetchall()
+        data = []
+        for i in range(len(rows)):
+            key = i
+            item = {column_name: value for column_name, value in zip(columns, rows[i])}
+            data[key] = item
+        return data
+
+
+class ReaderInDict(DatabaseReader):
+    """Класс читает данные из БД !!! """
+    def read(self, query, conn):
+        cur = conn.cursor()
+        cur.execute(query)
+        columns = [column[0] for column in cur.description]
+        rows = cur.fetchall()
         data = {}
         for i in range(len(rows)):
             key = i
