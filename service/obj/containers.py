@@ -49,7 +49,7 @@ class Requester(containers.DeclarativeContainer):
 
     sqlyte_requester = providers.Singleton(
         RequestRecordFromSQLyte,
-        tablename="tools",
+        tablename=config.tablename,
         database_client=database_client,
         database_reader=reader
     )
@@ -62,3 +62,15 @@ class Requester(containers.DeclarativeContainer):
     )
 
 
+
+# if __name__ == "__main__":
+#     container = Requester()
+#     container.config.from_dict(
+#         {'path': ':memory:',
+#          'tablename': "characteristics_of_material",
+#          'requester_type': 'sqlite',
+#          'reader_type': 'pandas_table'})
+#     requester = container.requester()
+#     print(requester)
+#     print(container.config())
+#     print(requester.tablename)
