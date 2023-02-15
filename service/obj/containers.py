@@ -5,10 +5,10 @@ import sqlite3
 from dependency_injector import containers, providers
 
 from service.obj.request_record_from_sqlyte import RequestRecordFromSQLyte
-from service.obj.request_record_from_sqlyte import ReaderInPandasTable
-from service.obj.request_record_from_sqlyte import ReaderInList
-from service.obj.request_record_from_sqlyte import ReaderInListDict
-from service.obj.request_record_from_sqlyte import ReaderInDict
+from service.obj.request_formatters import InPandasTableFormatter
+from service.obj.request_formatters import InListFormatter
+from service.obj.request_formatters import InListDictFormatter
+from service.obj.request_formatters import InDictFormatter
 
 
 class Requester(containers.DeclarativeContainer):
@@ -23,19 +23,19 @@ class Requester(containers.DeclarativeContainer):
 
     # Ридеры данных из БД:
     to_pandas_table = providers.Singleton(
-        ReaderInPandasTable,
+        InPandasTableFormatter,
     )
 
     to_list = providers.Singleton(
-        ReaderInList,
+        InListFormatter,
     )
 
     to_list_dict = providers.Singleton(
-        ReaderInListDict,
+        InListDictFormatter,
     )
 
     to_dict = providers.Singleton(
-        ReaderInDict,
+        InDictFormatter,
     )
 
     # Выбор класса чтения данных
@@ -63,15 +63,3 @@ class Requester(containers.DeclarativeContainer):
         csv=csv_requester,
         sqlite=sqlyte_requester,
     )
-
-
-# if __name__ == "__main__":
-#     SETTINGS = {'path': ':memory:', 'tablename': 'characteristics_of_material', 'requester_type': 'sqlite', 'reader_type': 'pandas_table'}
-#
-#     container = Requester()
-#     container.config.from_dict(SETTINGS)
-#     requester = container.requester()
-#     print(requester)
-#     print(container.config())
-#     print(requester.tablename)
-#     print(requester._database_reader)

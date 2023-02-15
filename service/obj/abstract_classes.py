@@ -37,7 +37,7 @@ class RecordRequester(ABC):
     def get_all_records(self): pass
 
 
-class DatabaseReader(ABC):
+class ResponseFormatter(ABC):
     """ Абстрактный класс, должен содержать функционал формата чтения данных из БД (в каком формате возвращать данные)
     """
     @abstractmethod
