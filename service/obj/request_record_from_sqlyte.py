@@ -46,6 +46,7 @@ class RequestRecordFromSQLyte(RecordRequester):
             query = f"SELECT * FROM {self.tablename}"
         return self._database_reader.read(query, conn)
 
+    @property
     def available_values(self) -> dict:
         """ Возвращает наборы доступных в таблице БД значений по категориям."""
         result = {}

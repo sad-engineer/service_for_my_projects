@@ -36,6 +36,11 @@ class RecordRequester(ABC):
     # Возвращает DataFrame со всеми записями таблицы tablename.
     def get_all_records(self): pass
 
+    @property
+    @abstractmethod
+    # Возвращает словарь, где ключи - столбцы таблицы, а значения - коллекции значений таблицы
+    def available_values(self) -> dict:pass
+
 
 class ResponseFormatter(ABC):
     """ Абстрактный класс, должен содержать функционал формата чтения данных из БД (в каком формате возвращать данные)
