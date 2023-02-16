@@ -55,6 +55,7 @@ class RequestRecordFromSQLyte(RecordRequester):
             cursor.execute(f'PRAGMA table_info({self.tablename})')
             columns = cursor.fetchall()
             for column in columns:
-                cursor.execute(f"SELECT {column[1]} FROM {self.tablename}")
-                result[column[1]] = set([item[0] for item in cursor.fetchall()])
+                if column[1] != 'index':
+                    cursor.execute(f"SELECT {column[1]} FROM {self.tablename}")
+                    result[column[1]] = set([item[0] for item in cursor.fetchall()])
         return result
