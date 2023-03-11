@@ -1,24 +1,38 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Классы пакета
+from .obj.abstract_classes import Dictionarer
+from .obj.abstract_classes import Notifier
+from .obj.abstract_classes import RecordRequester
+from .obj.cataloger import Cataloger
+from .obj.checker_in_dict import CheckerInDictionary
+from .obj.decorators import timeit
+from .obj.decorators import timeit_property
+from .obj.decorators import logged
+from .obj.containers import Requester
+from .obj.exceptions import InvalidValue, ReceivedEmptyDataFrame
+from .obj.request_record_from_sqlyte import RequestRecordFromSQLyte
+
+__all__ = [
     # Abstractclass
-from service.obj.abstract_classes import Dictionarer
-from service.obj.abstract_classes import Notifier
-from service.obj.abstract_classes import RecordRequester
+    'Dictionarer',
+    'Notifier',
+    'RecordRequester',
     # Каталогеры
-from service.obj.cataloger import Cataloger
+    'Cataloger',
     # Интерфейсы
-from service.obj.checker_in_dict import CheckerInDictionary
+    'CheckerInDictionary',
     # Декораторы
-from service.obj.decorators import timeit
-from service.obj.decorators import timeit_property
-from service.obj.decorators import logged
+    'timeit',
+    'timeit_property',
+    'logged',
     # Контейнеры
-from service.obj.containers import Requester
+    'Requester',
     # Пользовательские ошибки
-from service.obj.exceptions import InvalidValue, ReceivedEmptyDataFrame
+    'InvalidValue',
+    'ReceivedEmptyDataFrame',
     # Работа с БД
-from service.obj.request_record_from_sqlyte import RequestRecordFromSQLyte
+    'RequestRecordFromSQLyte',
+    ]
 
 
 # if __name__ == "__main__":
