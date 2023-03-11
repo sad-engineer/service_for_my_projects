@@ -9,7 +9,7 @@ from .obj.decorators import timeit
 from .obj.decorators import timeit_property
 from .obj.decorators import logged
 from .obj.containers import Requester
-from .obj.exceptions import InvalidValue, ReceivedEmptyDataFrame
+from .obj.exceptions import InvalidValue, ReceivedEmptyDataFrame, InvalidTypeValue
 from .obj.request_record_from_sqlyte import RequestRecordFromSQLyte
 
 __all__ = [
@@ -29,6 +29,7 @@ __all__ = [
     'Requester',
     # Пользовательские ошибки
     'InvalidValue',
+    'InvalidTypeValue',
     'ReceivedEmptyDataFrame',
     # Работа с БД
     'RequestRecordFromSQLyte',
