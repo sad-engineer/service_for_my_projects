@@ -49,3 +49,16 @@ def logged(cls=None, *, name=""):
         return cls
 
     return wrap if cls is None else wrap(cls)
+
+
+def output_debug_message_for_init_method():
+    """ Выводит в лог сообщение о созданном классе и зависимостях в нем.
+    Навесить на __init__ метод (перед этим навесить logged на класс)"""
+    def decorator(func):
+        def wrapper(self, *args, **kwargs):
+            result = func(self, *args, **kwargs)
+            self.debug("Создан {0} со следующими зависимостями: {1}".format(
+                self.__class__.__name__,  '; '.join([f'{k}: {v}' for k, v in kwargs.items()])))
+            return result
+        return wrapper
+    return decorator
