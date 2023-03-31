@@ -10,7 +10,7 @@ from .obj.decorators import timeit_property
 from .obj.decorators import logged
 from .obj.decorators import output_debug_message_for_init_method
 from .obj.containers import Requester
-from .obj.exceptions import CreationError, InvalidValue, InvalidTypeValue, ReceivedEmptyDataFrame
+from .obj.exceptions import CreationError, InvalidValue, InvalidTypeValue, ReceivedEmptyDataFrame, InvalidModuleName
 from .obj.request_record_from_sqlyte import RequestRecordFromSQLyte
 
 __all__ = [
@@ -30,7 +30,8 @@ __all__ = [
     # Контейнеры
     'Requester',
     # Пользовательские ошибки
-    'CreationError'
+    'CreationError',
+    'InvalidModuleName',
     'InvalidValue',
     'InvalidTypeValue',
     'ReceivedEmptyDataFrame',

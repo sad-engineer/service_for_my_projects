@@ -45,3 +45,14 @@ class ReceivedEmptyDataFrame(Exception):
     def __init__(self, message="") -> None:
         self.message = message
         super().__init__(self.message)
+
+
+class InvalidModuleName(Exception):
+    """Выкидывать ошибку, если модуль не существует.
+
+    Parameters:
+        message: str : объяснение ошибки
+    """
+    def __init__(self, message="") -> None:
+        self.message = message
+        super().__init__(self.message)
