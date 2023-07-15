@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------------------------------------------------------
-from service.obj.exceptions import InvalidValue
+from service_for_my_projects.obj.exceptions import InvalidValue
 
 
 def is_correct_dict_values(dict):

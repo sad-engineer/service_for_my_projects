@@ -4,11 +4,11 @@
 import sqlite3
 from dependency_injector import containers, providers
 
-from service.obj.request_record_from_sqlyte import RequestRecordFromSQLyte
-from service.obj.request_formatters import InPandasTableFormatter
-from service.obj.request_formatters import InListFormatter
-from service.obj.request_formatters import InListDictFormatter
-from service.obj.request_formatters import InDictFormatter
+from service_for_my_projects.obj.request_record_from_sqlyte import RequestRecordFromSQLyte
+from service_for_my_projects.obj.request_formatters import InPandasTableFormatter
+from service_for_my_projects.obj.request_formatters import InListFormatter
+from service_for_my_projects.obj.request_formatters import InListDictFormatter
+from service_for_my_projects.obj.request_formatters import InDictFormatter
 
 
 class Requester(containers.DeclarativeContainer):

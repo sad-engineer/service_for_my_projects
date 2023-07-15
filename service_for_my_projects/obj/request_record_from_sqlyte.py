@@ -4,7 +4,7 @@
 import sqlite3
 from typing import Any
 
-from service.obj.abstract_classes import RecordRequester, ResponseFormatter
+from service_for_my_projects.obj.abstract_classes import RecordRequester, ResponseFormatter
 
 
 class RequestRecordFromSQLyte(RecordRequester):

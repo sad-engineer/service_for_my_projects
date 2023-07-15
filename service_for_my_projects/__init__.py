@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from service.obj.abstract_classes import Dictionarer
-from service.obj.abstract_classes import Notifier
-from service.obj.abstract_classes import RecordRequester
-from service.obj.cataloger import Cataloger
-from service.obj.checker_in_dict import CheckerInDictionary
-from service.obj.decorators import timeit
-from service.obj.decorators import timeit_property
-from service.obj.decorators import logged
-from service.obj.decorators import output_debug_message_for_init_method
-from service.obj.containers import Requester
-from service.obj.exceptions import CreationError, InvalidValue, InvalidTypeValue, ReceivedEmptyDataFrame, InvalidModuleName
-from service.obj.request_record_from_sqlyte import RequestRecordFromSQLyte
+from service_for_my_projects.obj.abstract_classes import Dictionarer
+from service_for_my_projects.obj.abstract_classes import Notifier
+from service_for_my_projects.obj.abstract_classes import RecordRequester
+from service_for_my_projects.obj.cataloger import Cataloger
+from service_for_my_projects.obj.checker_in_dict import CheckerInDictionary
+from service_for_my_projects.obj.decorators import timeit
+from service_for_my_projects.obj.decorators import timeit_property
+from service_for_my_projects.obj.decorators import logged
+from service_for_my_projects.obj.decorators import output_debug_message_for_init_method
+from service_for_my_projects.obj.containers import Requester
+from service_for_my_projects.obj.exceptions import CreationError, InvalidValue, InvalidTypeValue, ReceivedEmptyDataFrame, InvalidModuleName
+from service_for_my_projects.obj.request_record_from_sqlyte import RequestRecordFromSQLyte
 
 __all__ = [
     # Abstractclass

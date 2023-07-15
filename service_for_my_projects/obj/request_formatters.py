@@ -4,7 +4,7 @@
 import pandas as pd
 import sqlite3
 from typing import List
-from service.obj.abstract_classes import ResponseFormatter
+from service_for_my_projects.obj.abstract_classes import ResponseFormatter
 
 
 class InPandasTableFormatter(ResponseFormatter):
